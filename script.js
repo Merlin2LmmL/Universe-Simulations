@@ -31,6 +31,23 @@ function applyLanguage(language) {
   document.documentElement.lang = language;
   document.documentElement.dataset.lang = language;
 
+  const pageTitle = language === 'de'
+    ? document.documentElement.dataset.titleDe
+    : document.documentElement.dataset.titleEn;
+  if (pageTitle) {
+    document.title = pageTitle;
+  }
+
+  const descriptionMeta = document.querySelector('meta[name="description"]');
+  if (descriptionMeta) {
+    const description = language === 'de'
+      ? descriptionMeta.dataset.descriptionDe
+      : descriptionMeta.dataset.descriptionEn;
+    if (description) {
+      descriptionMeta.setAttribute('content', description);
+    }
+  }
+
   const textNodes = document.querySelectorAll('[data-lang-text]');
   textNodes.forEach((node) => {
     node.hidden = node.dataset.langText !== language;
