@@ -1,0 +1,24 @@
+:root{
+  --panel-bg: rgba(10,20,30,1);
+  --control-bg: rgba(255,255,255,0.03);
+  --accent: #7dd3fc;
+}
+.hubble-panel{ display: flex; gap: 16px; align-items: stretch; }
+#universe{ flex: 1 1 auto; background: #021219; border-radius: 6px; box-shadow: 0 6px 18px rgba(0,0,0,0.5); }
+.controls{ width: 320px; background: var(--panel-bg); color: #dfeffc; padding: 12px; border-radius: 6px; box-shadow: 0 6px 18px rgba(0,0,0,0.6); }
+.controls h3{ margin: 0 0 8px 0; font-size: 16px; }
+.controls label{ display:block; font-size:13px; margin-top:10px; }
+.controls input[type=range]{ width:100%; }
+.controls .buttons{ display:flex; gap:8px; margin-top:10px; }
+.controls button{ flex:1; padding:8px 10px; background: var(--accent); border: none; color:#022; font-weight:600; border-radius:4px; cursor:pointer; }
+.controls .info{ margin-top:12px; font-size:13px; color:#b7d7e6 }
+
+/* make the canvas container fill available height on page */
+main.page-shell{ display:flex; }
+.panel.hubble-panel{ width:100%; height:calc(100vh - 140px); }
+#universe{ width:100%; height:100%; }
+
+@media (max-width: 800px){
+  .hubble-panel{ flex-direction:column; }
+  .controls{ width:100%; }
+}

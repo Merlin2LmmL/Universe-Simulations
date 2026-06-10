@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hubble Expansion | Universe Simulations</title>
+    <meta name="description" content="Bilingual placeholder page for the Hubble expansion simulation." />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="../script.js" defer></script>
+    <script src="./simulation.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="page-shell brand-row">
+        <a class="brand" href="../index.html">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-copy">
+            <h1>Universe Simulations</h1>
+            <p>
+              <span data-lang-text="en">Hubble expansion</span>
+              <span data-lang-text="de">Hubble-Expansion</span>
+            </p>
+          </span>
+        </a>
+        <nav aria-label="Section navigation">
+          <a href="../index.html#simulations">
+            <span data-lang-text="en">All simulations</span>
+            <span data-lang-text="de">Alle Simulationen</span>
+          </a>
+          <a href="../README.md">
+            <span data-lang-text="en">README</span>
+            <span data-lang-text="de">README</span>
+          </a>
+          <button class="language-toggle" type="button" data-language-toggle>
+            <span data-lang-text="en">Deutsch</span>
+            <span data-lang-text="de">English</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="panel hubble-panel">
+        <canvas id="universe" width="800" height="600" aria-label="Hubble Expansion canvas"></canvas>
+
+        <aside class="controls" aria-label="Simulation controls">
+          <h3>Hubble-Expansion — Steuerung</h3>
+          <label>Hubble-Konstante H₀: <span id="H0Val">0.5</span></label>
+          <input id="H0" type="range" min="0" max="2" step="0.01" value="0.5">
+
+          <label>Anzahl der Galaxien: <span id="countVal">200</span></label>
+          <input id="count" type="range" min="20" max="2000" step="10" value="200">
+
+          <label>Abspielgeschwindigkeit: <span id="timeScaleVal">1.0</span>x</label>
+          <input id="timeScale" type="range" min="0" max="10" step="0.1" value="1">
+
+          <label>Beschleunigungsfaktor: <span id="accelVal">0.0</span></label>
+          <input id="accel" type="range" min="0" max="2" step="0.01" value="0">
+
+          <div class="buttons">
+            <button id="playPause">Pause</button>
+            <button id="regenerate">Neu erzeugen</button>
+          </div>
+
+          <div class="info">
+            <strong>Prinzipien</strong>
+            <ul>
+              <li>Hubble-Gesetz: v = H · d</li>
+              <li>Kein Zentrum — von jedem Punkt entfernen sich die anderen</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </body>
+</html>

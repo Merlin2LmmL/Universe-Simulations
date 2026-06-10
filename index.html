@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Universe Simulations</title>
+    <meta
+      name="description"
+      content="A bilingual landing page for upcoming visual simulations about the expanding universe, inflation, time, and redshift."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="page-shell brand-row">
+        <a class="brand" href="./">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-copy">
+            <h1>Universe Simulations</h1>
+            <p>
+              <span data-lang-text="en">Visual physics for curious minds</span>
+              <span data-lang-text="de">Anschauliche Physik für Neugierige</span>
+            </p>
+          </span>
+        </a>
+        <nav aria-label="Primary">
+          <a href="#simulations"><span data-lang-text="en">Simulations</span><span data-lang-text="de">Simulationen</span></a>
+          <a href="#project"><span data-lang-text="en">Project</span><span data-lang-text="de">Projekt</span></a>
+          <button class="language-toggle" type="button" data-language-toggle>
+            <span data-lang-text="en">Deutsch</span>
+            <span data-lang-text="de">English</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <noscript>
+        <section class="panel fallback-panel">
+          <h2>Universe Simulations</h2>
+          <p>This site uses JavaScript for language switching and interactive simulations. Please enable JavaScript to view the full experience.</p>
+        </section>
+      </noscript>
+
+      <section class="hero" id="project">
+        <div class="hero-grid">
+          <div>
+            <span class="section-label">
+              <span data-lang-text="en">Project Overview</span>
+              <span data-lang-text="de">Projektüberblick</span>
+            </span>
+            <h2>
+              <span data-lang-text="en">Making core cosmology topics easier to explore.</span>
+              <span data-lang-text="de">Zentrale kosmologische Themen verständlicher machen.</span>
+            </h2>
+            <p>
+              <span data-lang-text="en">This repository will grow into a set of browser-based visualizations that explain key ideas about our universe in a clear and accessible way.</span>
+              <span data-lang-text="de">Dieses Repository wächst zu einer Sammlung von browserbasierten Visualisierungen heran, die wichtige Ideen über unser Universum klar und zugänglich erklären.</span>
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#simulations">
+                <span data-lang-text="en">Explore the roadmap</span>
+                <span data-lang-text="de">Roadmap ansehen</span>
+              </a>
+              <a class="button" href="README.md">
+                <span data-lang-text="en">Read the project notes</span>
+                <span data-lang-text="de">Projektnotizen lesen</span>
+              </a>
+            </div>
+          </div>
+          <aside class="hero-card" aria-label="Current scope">
+            <strong>
+              <span data-lang-text="en">What is prepared now</span>
+              <span data-lang-text="de">Was aktuell vorbereitet ist</span>
+            </strong>
+            <ul>
+              <li>
+                <span data-lang-text="en">English folder names across the project</span>
+                <span data-lang-text="de">Englische Ordnernamen im gesamten Projekt</span>
+              </li>
+              <li>
+                <span data-lang-text="en">Single-page language toggles for every topic</span>
+                <span data-lang-text="de">Sprachumschaltung direkt auf jeder Themenseite</span>
+              </li>
+              <li>
+                <span data-lang-text="en">Shared styling for both languages</span>
+                <span data-lang-text="de">Gemeinsames Design für beide Sprachen</span>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section id="simulations">
+        <span class="section-label">
+          <span data-lang-text="en">Planned Simulations</span>
+          <span data-lang-text="de">Geplante Simulationen</span>
+        </span>
+        <div class="cards-grid" style="margin-top: 18px;">
+          <article class="card">
+            <h3>Hubble Expansion</h3>
+            <p>
+              <span data-lang-text="en">Visualize how the universe expands over time and how distant galaxies recede.</span>
+              <span data-lang-text="de">Visualisiert, wie sich das Universum ausdehnt und Galaxien sich entfernen.</span>
+            </p>
+            <div class="card-meta"><span>Folder: hubble/</span><span data-lang-text="en">Coming soon</span><span data-lang-text="de">Bald verfügbar</span></div>
+            <a class="card-link" href="hubble/">
+              <span data-lang-text="en">Open page</span>
+              <span data-lang-text="de">Seite öffnen</span>
+            </a>
+          </article>
+          <article class="card">
+            <h3>Inflation Phase</h3>
+            <p>
+              <span data-lang-text="en">Show the early exponential growth of the universe with size-based comparisons.</span>
+              <span data-lang-text="de">Zeigt das frühe exponentielle Wachstum des Universums mit Größenvergleichen.</span>
+            </p>
+            <div class="card-meta"><span>Folder: inflation/</span><span data-lang-text="en">Coming soon</span><span data-lang-text="de">Bald verfügbar</span></div>
+            <a class="card-link" href="inflation/">
+              <span data-lang-text="en">Open page</span>
+              <span data-lang-text="de">Seite öffnen</span>
+            </a>
+          </article>
+          <article class="card">
+            <h3>Future Curves</h3>
+            <p>
+              <span data-lang-text="en">Use a slider to compare possible cosmic futures and their expansion paths.</span>
+              <span data-lang-text="de">Vergleicht mögliche kosmische Zukünfte mit einem Schieberegler.</span>
+            </p>
+            <div class="card-meta"><span>Folder: future/</span><span data-lang-text="en">Coming soon</span><span data-lang-text="de">Bald verfügbar</span></div>
+            <a class="card-link" href="future/">
+              <span data-lang-text="en">Open page</span>
+              <span data-lang-text="de">Seite öffnen</span>
+            </a>
+          </article>
+          <article class="card">
+            <h3>Universe Timeline</h3>
+            <p>
+              <span data-lang-text="en">Animate a chronological overview from the Big Bang to the far future.</span>
+              <span data-lang-text="de">Animierter Überblick von den ersten Momenten bis in die ferne Zukunft.</span>
+            </p>
+            <div class="card-meta"><span>Folder: timeline/</span><span data-lang-text="en">Coming soon</span><span data-lang-text="de">Bald verfügbar</span></div>
+            <a class="card-link" href="timeline/">
+              <span data-lang-text="en">Open page</span>
+              <span data-lang-text="de">Seite öffnen</span>
+            </a>
+          </article>
+          <article class="card">
+            <h3>Redshift</h3>
+            <p>
+              <span data-lang-text="en">Explain wavelength stretching with an animation that makes Doppler shift visible.</span>
+              <span data-lang-text="de">Erklärt die Wellenlängenverschiebung mit einer Animation für Licht und Bewegung.</span>
+            </p>
+            <div class="card-meta"><span>Folder: redshift/</span><span data-lang-text="en">Coming soon</span><span data-lang-text="de">Bald verfügbar</span></div>
+            <a class="card-link" href="redshift/">
+              <span data-lang-text="en">Open page</span>
+              <span data-lang-text="de">Seite öffnen</span>
+            </a>
+          </article>
+          <article class="card">
+            <h3>Doppler Effect</h3>
+            <p>
+              <span data-lang-text="en">This is conceptually part of the redshift topic and will be integrated there later.</span>
+              <span data-lang-text="de">Der Dopplereffekt gehört inhaltlich zur Rotverschiebung und wird dort integriert.</span>
+            </p>
+            <div class="card-meta"><span data-lang-text="en">Topic note</span><span data-lang-text="de">Hinweis</span><span data-lang-text="en">Included later</span><span data-lang-text="de">Später enthalten</span></div>
+            <a class="card-link" href="redshift/">
+              <span data-lang-text="en">See redshift page</span>
+              <span data-lang-text="de">Zur Rotverschiebung</span>
+            </a>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer page-shell">
+      <p>
+        <span data-lang-text="en">Initial scaffold for future physics visualizations.</span>
+        <span data-lang-text="de">Erste Struktur für zukünftige physikalische Visualisierungen.</span>
+      </p>
+    </footer>
+  </body>
+</html>
