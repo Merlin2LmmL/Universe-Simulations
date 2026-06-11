@@ -1,219 +1,158 @@
 <!DOCTYPE html>
 <html lang="en" data-lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Hubble Expansion</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="layout">
 
-    <title>Hubble Expansion | Universe Simulations</title>
+  <div class="canvas-wrap">
+    <canvas id="universe" aria-label="Hubble Expansion simulation"></canvas>
+    <div class="zoom-buttons">
+      <button class="btn-zoom" id="zoomIn"  aria-label="Zoom in">+</button>
+      <button class="btn-zoom" id="zoomOut" aria-label="Zoom out">−</button>
+    </div>
+  </div>
 
-    <meta
-      name="description"
-      content="Bilingual placeholder page for the Hubble expansion simulation."
-    />
+  <aside class="sidebar" aria-label="Simulation controls">
+    <div class="sidebar-top">
+      <button class="btn-icon" onclick="window.location.href='../index.html#simulations'" title="Back" aria-label="Go back">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="sim-title">
+        <span data-lang-text="en">Hubble Expansion</span>
+        <span data-lang-text="de">Hubble-Expansion</span>
+      </span>
+      <button class="btn-lang" id="langToggle" type="button" aria-label="Switch language">
+        <span data-lang-text="en">DE</span>
+        <span data-lang-text="de">EN</span>
+      </button>
+    </div>
 
-    <link rel="stylesheet" href="../styles.css" />
-    <link rel="stylesheet" href="./styles.css" />
+    <div class="sidebar-body">
 
-    <script src="../script.js" defer></script>
-    <script src="./simulation.js" defer></script>
-  </head>
-
-  <body class="simulation-page hubble-page">
-    <header class="site-header">
-      <div class="page-shell brand-row">
-        <a class="brand" href="../index.html">
-          <span class="brand-mark" aria-hidden="true"></span>
-
-          <span class="brand-copy">
-            <h1>Universe Simulations</h1>
-
-            <p>
-              <span data-lang-text="en">Hubble Expansion</span>
-              <span data-lang-text="de">Hubble-Expansion</span>
-            </p>
-          </span>
-        </a>
-
-        <nav aria-label="Section navigation">
-          <a href="../index.html#simulations">
-            <span data-lang-text="en">All simulations</span>
-            <span data-lang-text="de">Alle Simulationen</span>
-          </a>
-
-          <a href="../README.md">
-            <span data-lang-text="en">README</span>
-            <span data-lang-text="de">README</span>
-          </a>
-
-          <button
-            class="language-toggle"
-            type="button"
-            data-language-toggle
-          >
-            <span data-lang-text="en">Deutsch</span>
-            <span data-lang-text="de">English</span>
-          </button>
-        </nav>
+      <div class="ctrl-group">
+        <div class="ctrl-group-title">
+          <span data-lang-text="en">Expansion</span>
+          <span data-lang-text="de">Expansion</span>
+        </div>
+        <div class="ctrl-row">
+          <div class="ctrl-row-head">
+            <span class="ctrl-label">
+              <span data-lang-text="en">Hubble constant H₀</span>
+              <span data-lang-text="de">Hubble-Konstante H₀</span>
+            </span>
+            <span class="ctrl-val" id="H0Val">0.50</span>
+          </div>
+          <input id="H0" type="range" min="0" max="1" step="0.001" value="0.699" />
+        </div>
+        <div class="ctrl-row">
+          <div class="ctrl-row-head">
+            <span class="ctrl-label">
+              <span data-lang-text="en">Acceleration</span>
+              <span data-lang-text="de">Beschleunigung</span>
+            </span>
+            <span class="ctrl-val" id="accelVal">0.00</span>
+          </div>
+          <input id="accel" type="range" min="0" max="1" step="0.001" value="0" />
+        </div>
       </div>
-    </header>
 
-    <main class="page-shell hubble-shell">
-      <section class="panel hubble-panel simulation-layout">
-        <canvas
-          id="universe"
-          class="simulation-viewport"
-          width="800"
-          height="600"
-          aria-label="Hubble Expansion canvas"
-        ></canvas>
-
-        <aside
-          class="controls simulation-sidebar"
-          aria-label="Simulation controls"
-        >
-          <h3>
-            <span data-lang-text="en">Hubble Expansion — Controls</span>
-            <span data-lang-text="de">Hubble-Expansion — Steuerung</span>
-          </h3>
-
-          <label>
-            <span data-lang-text="en">Hubble constant H₀:</span>
-            <span data-lang-text="de">Hubble-Konstante H₀:</span>
-            <span id="H0Val">0.5</span>
-          </label>
-
-          <input
-            id="H0"
-            type="range"
-            min="0"
-            max="2"
-            step="0.01"
-            value="0.5"
-          />
-
-          <label>
-            <span data-lang-text="en">Number of galaxies:</span>
-            <span data-lang-text="de">Anzahl der Galaxien:</span>
-            <span id="countVal">200</span>
-          </label>
-
-          <input
-            id="count"
-            type="range"
-            min="20"
-            max="2000"
-            step="10"
-            value="200"
-          />
-
-          <label>
-            <span data-lang-text="en">Playback speed:</span>
-            <span data-lang-text="de">Abspielgeschwindigkeit:</span>
-            <span id="timeScaleVal">1.0</span>x
-          </label>
-
-          <input
-            id="timeScale"
-            type="range"
-            min="0"
-            max="10"
-            step="0.1"
-            value="1"
-          />
-
-          <label>
-            <span data-lang-text="en">Acceleration factor:</span>
-            <span data-lang-text="de">Beschleunigungsfaktor:</span>
-            <span id="accelVal">0.0</span>
-          </label>
-
-          <input
-            id="accel"
-            type="range"
-            min="0"
-            max="2"
-            step="0.01"
-            value="0"
-          />
-
-          <label class="checkbox-row">
-            <input id="gravityToggle" type="checkbox" />
-
-            <span data-lang-text="en">Enable galaxy attraction</span>
-            <span data-lang-text="de">Galaxie-Anziehung aktivieren</span>
-          </label>
-
-          <label class="checkbox-row">
-            <input id="drawStarfield" type="checkbox" checked />
-
-            <span data-lang-text="en">Draw starfield</span>
-            <span data-lang-text="de">Sternenfeld zeichnen</span>
-          </label>
-
-          <div id="gravityControls" class="gravity-controls" hidden>
-            <label>
-              <span data-lang-text="en">Strength:</span>
-              <span data-lang-text="de">Intensität:</span>
-              <span id="gravityVal">0.6</span>
-            </label>
-
-            <input
-              id="gravityStrength"
-              type="range"
-              min="0"
-              max="2"
-              step="0.01"
-              value="0.6"
-            />
+      <div class="ctrl-group">
+        <div class="ctrl-group-title">
+          <span data-lang-text="en">Simulation</span>
+          <span data-lang-text="de">Simulation</span>
+        </div>
+        <div class="ctrl-row">
+          <div class="ctrl-row-head">
+            <span class="ctrl-label">
+              <span data-lang-text="en">Galaxies</span>
+              <span data-lang-text="de">Galaxien</span>
+            </span>
+            <span class="ctrl-val" id="countVal">200</span>
           </div>
-
-          <div class="buttons">
-            <button id="playPause">
-              <span data-lang-text="en">Pause</span>
-              <span data-lang-text="de">Pause</span>
-            </button>
-
-            <button id="regenerate">
-              <span data-lang-text="en">Regenerate</span>
-              <span data-lang-text="de">Neu erzeugen</span>
-            </button>
+          <input id="count" type="range" min="20" max="2000" step="10" value="200" />
+        </div>
+        <div class="ctrl-row">
+          <div class="ctrl-row-head">
+            <span class="ctrl-label">
+              <span data-lang-text="en">Speed</span>
+              <span data-lang-text="de">Geschwindigkeit</span>
+            </span>
+            <span class="ctrl-val"><span id="timeScaleVal">1.0</span>×</span>
           </div>
+          <input id="timeScale" type="range" min="0" max="10" step="0.1" value="1" />
+        </div>
+      </div>
 
-          <div class="info">
-            <strong>
-              <span data-lang-text="en">Principles</span>
-              <span data-lang-text="de">Prinzipien</span>
-            </strong>
-
-            <ul>
-              <li>
-                <span data-lang-text="en">Hubble law: v = H · d</span>
-                <span data-lang-text="de">Hubble-Gesetz: v = H · d</span>
-              </li>
-
-              <li>
-                <span data-lang-text="en">
-                  No center — from every point all others move away
-                </span>
-                <span data-lang-text="de">
-                  Kein Zentrum — von jedem Punkt entfernen sich die anderen
-                </span>
-              </li>
-
-              <li>
-                <span data-lang-text="en">
-                  Optional attraction can slow local groups and occasionally
-                  cause mergers
-                </span>
-                <span data-lang-text="de">
-                  Optionale Anziehung kann lokale Gruppen bremsen und selten
-                  fusionieren lassen
-                </span>
-              </li>
-            </ul>
+      <div class="ctrl-group">
+        <div class="ctrl-group-title">
+          <span data-lang-text="en">Display</span>
+          <span data-lang-text="de">Anzeige</span>
+        </div>
+        <label class="check-row">
+          <input id="drawStarfield" type="checkbox" />
+          <span class="ctrl-label">
+            <span data-lang-text="en">Starfield</span>
+            <span data-lang-text="de">Sternenfeld</span>
+          </span>
+        </label>
+        <label class="check-row">
+          <input id="gravityToggle" type="checkbox" />
+          <span class="ctrl-label">
+            <span data-lang-text="en">Galaxy attraction</span>
+            <span data-lang-text="de">Galaxie-Anziehung</span>
+          </span>
+        </label>
+        <div id="gravityControls" class="sub-panel" hidden>
+          <div class="ctrl-row">
+            <div class="ctrl-row-head">
+              <span class="ctrl-label">
+                <span data-lang-text="en">Strength</span>
+                <span data-lang-text="de">Intensität</span>
+              </span>
+              <span class="ctrl-val" id="gravityVal">0.6</span>
+            </div>
+            <input id="gravityStrength" type="range" min="0" max="2" step="0.01" value="0.6" />
           </div>
-        </aside>
-      </section>
-    </main>
-  </body>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button id="playPause" class="btn primary">
+          <span data-lang-text="en">Pause</span>
+          <span data-lang-text="de">Pause</span>
+        </button>
+        <button id="regenerate" class="btn">
+          <span data-lang-text="en">Regenerate</span>
+          <span data-lang-text="de">Neu erzeugen</span>
+        </button>
+      </div>
+
+      <div class="info-block">
+        <p>
+          <span data-lang-text="en">Hubble law: <strong>v = H · d</strong></span>
+          <span data-lang-text="de">Hubble-Gesetz: <strong>v = H · d</strong></span>
+        </p>
+        <p>
+          <span data-lang-text="en">Toroidal universe — scroll far enough in any direction and you return to where you started.</span>
+          <span data-lang-text="de">Toroidales Universum — weit genug scrollen und du kehrst zum Ausgangspunkt zurück.</span>
+        </p>
+        <p>
+          <span data-lang-text="en">Drag to pan · Scroll or pinch to zoom</span>
+          <span data-lang-text="de">Ziehen zum Schwenken · Scrollen oder Kneifen zum Zoomen</span>
+        </p>
+      </div>
+
+    </div>
+  </aside>
+
+</div>
+<script src="simulation.js"></script>
+</body>
 </html>
