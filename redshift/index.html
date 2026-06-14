@@ -1,62 +1,133 @@
 <!DOCTYPE html>
-<html lang="en" data-lang="en" data-title-en="Redshift | Universe Simulations" data-title-de="Rotverschiebung | Universe Simulations">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Redshift | Universe Simulations</title>
-    <meta name="description" content="Bilingual placeholder page for the redshift and Doppler effect simulation." data-description-en="Bilingual placeholder page for the redshift and Doppler effect simulation." data-description-de="Zweisprachige Platzhalterseite für die Rotverschiebung und den Dopplereffekt." />
-    <link rel="stylesheet" href="../styles.css" />
-    <script src="../script.js" defer></script>
-  </head>
-  <body class="simulation-page">
-    <header class="site-header">
-      <div class="page-shell brand-row">
-        <a class="brand" href="../index.html">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-copy">
-            <h1>Universe Simulations</h1>
-            <p>
-              <span data-lang-text="en">Redshift</span>
-              <span data-lang-text="de">Rotverschiebung</span>
-            </p>
-          </span>
-        </a>
-        <nav aria-label="Section navigation">
-          <a href="../index.html#simulations">
-            <span data-lang-text="en">All simulations</span>
-            <span data-lang-text="de">Alle Simulationen</span>
-          </a>
-          <a href="../README.md">
-            <span data-lang-text="en">README</span>
-            <span data-lang-text="de">README</span>
-          </a>
-          <button class="language-toggle" type="button" data-language-toggle>
-            <span data-lang-text="en">Deutsch</span>
-            <span data-lang-text="de">English</span>
-          </button>
-        </nav>
-      </div>
-    </header>
+<html lang="de" data-lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Rotverschiebung</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="layout">
+  <div class="canvas-wrap">
+    <canvas id="universe" aria-label="Rotverschiebungs-Simulation"></canvas>
+  </div>
+  <aside class="sidebar" aria-label="Simulation controls">
+    <div class="sidebar-top">
+      <button class="btn-icon" onclick="window.location.href='../index.html#simulations'" title="Back" aria-label="Go back">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="sim-title">
+        <span data-lang-text="de">Rotverschiebung</span>
+        <span data-lang-text="en">Redshift</span>
+      </span>
+      <button class="btn-lang" id="langToggle" type="button" aria-label="Switch language">
+        <span data-lang-text="de">EN</span>
+        <span data-lang-text="en">DE</span>
+      </button>
+    </div>
+    <div class="sidebar-body">
+      <div class="ctrl-group">
+        <div class="ctrl-group-title">
+          <span data-lang-text="de">Parameter</span>
+          <span data-lang-text="en">Parameters</span>
+        </div>
 
-    <main class="page-shell simulation-shell">
-      <section class="panel simulation-panel">
-        <span class="section-label">
-          <span data-lang-text="en">Redshift</span>
-          <span data-lang-text="de">Rotverschiebung</span>
-        </span>
-        <h2>
-          <span data-lang-text="en">Placeholder for the wavelength and Doppler animation.</span>
-          <span data-lang-text="de">Platzhalter für die Wellenlängen- und Doppler-Animation.</span>
-        </h2>
+        <div class="ctrl-row">
+          <div class="ctrl-row-head">
+            <span class="ctrl-label">
+              <span data-lang-text="de">Expansionsrate</span>
+              <span data-lang-text="en">Expansion rate</span>
+            </span>
+            <span class="ctrl-val" id="expansionVal">0.00</span>
+          </div>
+          <input id="expansion" type="range" min="0" max="1" step="0.01" value="0" oninput="onExpansionChange(this.value)" />
+        </div>
+
+        <div class="ctrl-row">
+          <div class="ctrl-row-head">
+            <span class="ctrl-label">
+              <span data-lang-text="de">Entfernung zur Quelle</span>
+              <span data-lang-text="en">Distance to source</span>
+            </span>
+          </div>
+          <input id="distance" type="range" min="0" max="100" step="1" value="50" oninput="onDistanceChange(this.value)" />
+          <div class="dist-label-display" id="distLabelDisplay">150 Mio. km</div>
+        </div>
+
+        <label class="check-row">
+          <input id="showWavelength" type="checkbox" checked onchange="onShowWavelengthChange(this.checked)" />
+          <span class="ctrl-label">
+            <span data-lang-text="de">Wellenlänge in nm</span>
+            <span data-lang-text="en">Wavelength in nm</span>
+          </span>
+        </label>
+
+        <label class="check-row">
+          <input id="realisticMode" type="checkbox" onchange="onRealisticModeChange(this.checked)" />
+          <span class="ctrl-label">
+            <span data-lang-text="de">Realistische Werte</span>
+            <span data-lang-text="en">Realistic values</span>
+          </span>
+        </label>
+
+        <label class="check-row">
+          <input id="showDynamicSpectrum" type="checkbox" checked onchange="onShowDynamicSpectrumChange(this.checked)" />
+          <span class="ctrl-label">
+            <span data-lang-text="de">Dynamisches Spektrum</span>
+            <span data-lang-text="en">Dynamic spectrum</span>
+          </span>
+        </label>
+
+        <label class="check-row">
+          <input id="showStarfield" type="checkbox" checked onchange="onShowStarfieldChange(this.checked)" />
+          <span class="ctrl-label">
+            <span data-lang-text="de">Sternenfeld</span>
+            <span data-lang-text="en">Star field</span>
+          </span>
+        </label>
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-group-title">
+          <span data-lang-text="de">Legende</span>
+          <span data-lang-text="en">Legend</span>
+        </div>
+        <div class="spectrum-legend">
+          <div class="legend-item">
+            <span class="legend-dot" style="background:#fff;border:1px solid rgba(255,255,255,0.4)"></span>
+            <span data-lang-text="de">Ruhespektrum</span>
+            <span data-lang-text="en">Rest spectrum</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot" id="shiftedDot" style="background:#f97316"></span>
+            <span data-lang-text="de">Verschobenes Spektrum</span>
+            <span data-lang-text="en">Shifted spectrum</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button id="playPause" class="btn primary" onclick="togglePlay()">
+          <span data-lang-text="de">Pause</span>
+          <span data-lang-text="en">Pause</span>
+        </button>
+      </div>
+
+      <div class="info-block">
         <p>
-          <span data-lang-text="en">This page will later visualize how light stretches toward the red end of the spectrum and how the Doppler effect contributes to that idea.</span>
-          <span data-lang-text="de">Diese Seite visualisiert später, wie sich Licht in den roten Bereich des Spektrums verschiebt und wie der Dopplereffekt dazu beiträgt.</span>
+          <span data-lang-text="de">Kosmologische Rotverschiebung: <strong>z = Δλ / λ₀</strong></span>
+          <span data-lang-text="en">Cosmological redshift: <strong>z = Δλ / λ₀</strong></span>
         </p>
-        <ul class="topic-list">
-          <li><strong><span data-lang-text="en">Goal:</span><span data-lang-text="de">Ziel:</span></strong><span data-lang-text="en">show wavelength stretching in motion.</span><span data-lang-text="de">Wellenlängenverschiebung in Bewegung zeigen.</span></li>
-          <li><strong><span data-lang-text="en">Next step:</span><span data-lang-text="de">Nächster Schritt:</span></strong><span data-lang-text="en">define the wave animation and motion cues.</span><span data-lang-text="de">Wellenanimation und Bewegungssignale festlegen.</span></li>
-        </ul>
-      </section>
-    </main>
-  </body>
+        <p>
+          <span data-lang-text="de">Die Wellenlänge wird durch die Raumdehnung während der Reise gestreckt – nicht durch Bewegung der Quelle.</span>
+          <span data-lang-text="en">The wavelength is stretched by space expansion during travel – not by the motion of the source.</span>
+        </p>
+      </div>
+    </div>
+  </aside>
+</div>
+<script src="simulation.js"></script>
+</body>
 </html>

@@ -1,62 +1,140 @@
 <!DOCTYPE html>
-<html lang="en" data-lang="en" data-title-en="Universe Timeline | Universe Simulations" data-title-de="Universums-Zeitstrahl | Universe Simulations">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Universe Timeline | Universe Simulations</title>
-    <meta name="description" content="Bilingual placeholder page for the animated universe timeline." data-description-en="Bilingual placeholder page for the animated universe timeline." data-description-de="Zweisprachige Platzhalterseite für den animierten Zeitstrahl des Universums." />
-    <link rel="stylesheet" href="../styles.css" />
-    <script src="../script.js" defer></script>
-  </head>
-  <body class="simulation-page">
-    <header class="site-header">
-      <div class="page-shell brand-row">
-        <a class="brand" href="../index.html">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-copy">
-            <h1>Universe Simulations</h1>
-            <p>
-              <span data-lang-text="en">Universe timeline</span>
-              <span data-lang-text="de">Universums-Zeitstrahl</span>
-            </p>
-          </span>
-        </a>
-        <nav aria-label="Section navigation">
-          <a href="../index.html#simulations">
-            <span data-lang-text="en">All simulations</span>
-            <span data-lang-text="de">Alle Simulationen</span>
-          </a>
-          <a href="../README.md">
-            <span data-lang-text="en">README</span>
-            <span data-lang-text="de">README</span>
-          </a>
-          <button class="language-toggle" type="button" data-language-toggle>
-            <span data-lang-text="en">Deutsch</span>
-            <span data-lang-text="de">English</span>
-          </button>
-        </nav>
-      </div>
-    </header>
+<html lang="de" data-lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Inflationsphase</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="layout">
 
-    <main class="page-shell simulation-shell">
-      <section class="panel simulation-panel">
-        <span class="section-label">
-          <span data-lang-text="en">Universe Timeline</span>
-          <span data-lang-text="de">Universums-Zeitstrahl</span>
-        </span>
-        <h2>
-          <span data-lang-text="en">Placeholder for the animated cosmic timeline.</span>
-          <span data-lang-text="de">Platzhalter für den animierten kosmischen Zeitstrahl.</span>
-        </h2>
-        <p>
-          <span data-lang-text="en">This page will later present the history of the universe from the earliest moments to the far future in a clear timeline format.</span>
-          <span data-lang-text="de">Diese Seite stellt später die Geschichte des Universums von den frühesten Momenten bis in die ferne Zukunft in einer klaren Zeitleistenform dar.</span>
+  <div class="canvas-wrap">
+    <canvas id="universe" aria-label="Inflationsphase-Simulation"></canvas>
+  </div>
+
+  <aside class="sidebar" aria-label="Simulation controls">
+    <div class="sidebar-top">
+      <button class="btn-icon" onclick="window.location.href='../index.html#simulations'" title="Back" aria-label="Go back">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <span class="sim-title">
+        <span data-lang-text="de">Inflationsphase</span>
+        <span data-lang-text="en">Inflation Phase</span>
+      </span>
+
+      <button class="btn-lang" id="langToggle" type="button" aria-label="Switch language">
+        <span data-lang-text="de">EN</span>
+        <span data-lang-text="en">DE</span>
+      </button>
+    </div>
+
+    <div class="sidebar-body">
+
+      <div class="ctrl-group">
+        <div class="ctrl-group-title">
+          <span data-lang-text="de">Zeitskala</span>
+          <span data-lang-text="en">Time Scale</span>
+        </div>
+
+        <div class="ctrl-row mode-toggle-row">
+          <button id="btnLog" class="btn mode-btn active" onclick="onModeChange('log')">
+            <span data-lang-text="de">Logarithmisch</span>
+            <span data-lang-text="en">Logarithmic</span>
+          </button>
+          <button id="btnLin" class="btn mode-btn" onclick="onModeChange('lin')">
+            <span data-lang-text="de">Quadratisch</span>
+            <span data-lang-text="en">Quadratic</span>
+          </button>
+        </div>
+
+        <p class="mode-desc" id="modeDesc">
+          <span data-lang-text="de" id="modeDescDe"></span>
+          <span data-lang-text="en" id="modeDescEn"></span>
         </p>
-        <ul class="topic-list">
-          <li><strong><span data-lang-text="en">Goal:</span><span data-lang-text="de">Ziel:</span></strong><span data-lang-text="en">make the overall sequence memorable.</span><span data-lang-text="de">die Reihenfolge der Ereignisse einprägsam machen.</span></li>
-          <li><strong><span data-lang-text="en">Next step:</span><span data-lang-text="de">Nächster Schritt:</span></strong><span data-lang-text="en">decide the timeline milestones and motion design.</span><span data-lang-text="de">Meilensteine und Motion-Design festlegen.</span></li>
-        </ul>
-      </section>
-    </main>
-  </body>
+      </div>
+
+      <div class="ctrl-group" id="eraWeightGroup">
+        <div class="ctrl-group-title">
+          <span data-lang-text="de">Ären-Gewichtung</span>
+          <span data-lang-text="en">Era Weighting</span>
+        </div>
+        <div class="slider-row">
+          <input type="range" id="sliderEraWeight" min="0" max="200" value="100" step="5" oninput="onEraWeightChange()">
+          <span class="slider-val" id="labelEraWeight">100%</span>
+        </div>
+      </div>
+
+      <div class="ctrl-group" id="quadExponentGroup">
+        <div class="ctrl-group-title">
+          <span data-lang-text="de">Zeitkurven-Exponent</span>
+          <span data-lang-text="en">Time Curve Exponent</span>
+        </div>
+        <div class="slider-row">
+          <input type="range" id="sliderLinExp" min="5" max="30" value="20" step="1">
+          <span class="slider-val" id="labelLinExp">2.0</span>
+        </div>
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-group-title">
+          <span data-lang-text="de">Animationsdauer</span>
+          <span data-lang-text="en">Animation Duration</span>
+        </div>
+        <div class="slider-row">
+          <input type="range" id="sliderDuration" min="10" max="120" value="40" step="5" oninput="onDurationChange()">
+          <span class="slider-val" id="labelDuration">40 s</span>
+        </div>
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-group-title">
+          <span data-lang-text="de">Wiedergabegeschwindigkeit</span>
+          <span data-lang-text="en">Playback Speed</span>
+        </div>
+        <div class="slider-row">
+          <input type="range" id="sliderSpeed" min="25" max="400" value="100" step="25">
+          <span class="slider-val" id="labelSpeed">1.00×</span>
+        </div>
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-group-title">
+          <span data-lang-text="de">Partikel-Dichte</span>
+          <span data-lang-text="en">Particle Density</span>
+        </div>
+        <div class="slider-row">
+          <input type="range" id="sliderDensity" min="10" max="150" value="100" step="5" oninput="onDensityChange()">
+          <span class="slider-val" id="labelDensity">100%</span>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button id="playPause" class="btn primary" onclick="togglePlay()">
+          <span data-lang-text="de">Start</span>
+          <span data-lang-text="en">Start</span>
+        </button>
+
+        <button id="resetBtn" class="btn" onclick="resetSim()">
+          <span data-lang-text="de">Reset</span>
+          <span data-lang-text="en">Reset</span>
+        </button>
+      </div>
+
+      <div id="eraInfo" class="era-info-block">
+        <div class="era-info-title"></div>
+        <div class="era-info-sub"></div>
+        <p class="era-info-text"></p>
+      </div>
+
+    </div>
+  </aside>
+
+</div>
+
+<script src="simulation.js"></script>
+</body>
 </html>
