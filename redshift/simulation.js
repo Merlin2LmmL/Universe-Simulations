@@ -432,15 +432,15 @@ function drawSpectrum(x, y, w, h) {
     const rightMask = ctx.createLinearGradient(visEndX, 0, x + w, 0);
     rightMask.addColorStop(0, 'rgba(0,0,0,0)'); rightMask.addColorStop(0.45, 'rgba(0,0,0,0.75)'); rightMask.addColorStop(1, 'rgba(0,0,0,1)');
     ctx.fillStyle = rightMask; ctx.fillRect(visEndX, y, x + w - visEndX, h);
-    ctx.font = 'bold 13px "Inter", sans-serif'; ctx.textBaseline = 'middle';
-    if (380 - extMin > 40) {
-      const uvMidX = x + (((extMin + (380 - extMin) * 0.5) - extMin) / range) * w;
-      ctx.fillStyle = 'rgba(210,170,255,0.92)'; ctx.textAlign = 'center'; ctx.fillText('UV', uvMidX, y + h / 2);
-    }
-    if (extMax - 780 > 40) {
-      const irMidX = x + ((780 + (extMax - 780) * 0.5 - extMin) / range) * w;
-      ctx.fillStyle = 'rgba(255,150,110,0.92)'; ctx.textAlign = 'center'; ctx.fillText('IR', irMidX, y + h / 2);
-    }
+    ctx.font = 'bold 13px "Inter", sans-serif';
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+
+    ctx.fillStyle = 'rgba(210,170,255,0.92)';
+    ctx.fillText('UV', x + 20, y + h / 2);
+
+    ctx.fillStyle = 'rgba(255,150,110,0.92)';
+    ctx.fillText('IR', x + w - 20, y + h / 2);
   }
   lines.forEach(lam => {
     const xp = x + ((lam - extMin) / range) * w;
