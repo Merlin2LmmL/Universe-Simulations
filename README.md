@@ -6,26 +6,17 @@ A collection of browser-based physics visualizations that will help explain key 
 
 ```text
 /
-├── index.html          # Bilingual landing page with a language toggle
-├── script.js           # Shared language-switch logic
-├── styles.css          # Shared visual design for the site
+├── index.html        # Landing Page for navigating the simulations
 ├── hubble/
-│   └── index.html      # Hubble expansion page with EN/DE content
-├── inflation/
-│   └── index.html      # Inflation phase page with EN/DE content
+│   └── index.html    # Hubble Expansion Simulation
 ├── future/
-│   └── index.html      # Future curves page with EN/DE content
+│   └── index.html    # Ultimate Fate of the Universe - PLANNED -
 ├── timeline/
-│   └── index.html      # Universe timeline page with EN/DE content
+│   └── index.html    # Timeline of the Universe
 └── redshift/
-    └── index.html      # Redshift page with EN/DE content
+    └── index.html    # Interactive Redshift Simulation
 ```
 
-## Planned Simulations
+## Purpose
 
-1. Hubble expansion
-2. Inflation phase and scale visualization
-3. Future curves with a slider
-4. Animated universe timeline
-5. Redshift with wavelength animation
-6. Doppler effect, as part of the redshift topic
+Created for an in-class pyhsics presentation.
