@@ -1,160 +1,376 @@
 <!DOCTYPE html>
 <html lang="en" data-lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Universe Simulations</title>
-    <meta
-      name="description"
-      content="A bilingual landing page for upcoming visual simulations about the expanding universe, inflation, time, and redshift."
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="page-shell brand-row">
-        <a class="brand" href="./">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-copy">
-            <h1>Universe Simulations</h1>
-            <p>
-              <span data-lang-text="en">Visual physics for curious minds</span>
-              <span data-lang-text="de">Anschauliche Physik für Neugierige</span>
-            </p>
-          </span>
-        </a>
-        <nav aria-label="Primary">
-          <a href="#simulations"><span data-lang-text="en">Simulations</span><span data-lang-text="de">Simulationen</span></a>
-          <a href="#project"><span data-lang-text="en">Project</span><span data-lang-text="de">Projekt</span></a>
-          <button class="language-toggle" type="button" data-language-toggle>
-            <span data-lang-text="en">Deutsch</span>
-            <span data-lang-text="de">English</span>
-          </button>
-        </nav>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universe Simulations</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d1a2e;
+    --bg-mid: #112038;
+    --surface: #162844;
+    --surface-hover: #1c3357;
+    --border: rgba(120, 160, 210, 0.12);
+    --border-hover: rgba(120, 160, 210, 0.28);
+    --text-primary: #dce8f5;
+    --text-secondary: #8aaac8;
+    --text-muted: #5a7a9a;
+    --accent: #7fb3d9;
+    --accent-light: #a8cceb;
+    --font-serif: 'Georgia', 'Times New Roman', serif;
+    --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  html, body {
+    min-height: 100%;
+  }
+
+  body {
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse at 20% 15%, rgba(30, 60, 110, 0.45) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 80%, rgba(15, 40, 80, 0.35) 0%, transparent 50%);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrapper {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 2.5rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .site-name {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: normal;
+    letter-spacing: 0.03em;
+    color: var(--accent-light);
+    opacity: 0.85;
+  }
+
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem 0;
+  }
+
+  .lang-btn {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .lang-btn.active {
+    color: var(--accent);
+    background: rgba(127, 179, 217, 0.1);
+  }
+
+  .lang-btn:hover:not(.active) {
+    color: var(--text-secondary);
+  }
+
+  .lang-divider {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    opacity: 0.5;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 5rem 0 4.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.1rem, 5vw, 3rem);
+    font-weight: normal;
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-body {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    max-width: 580px;
+  }
+
+  /* ── SIMULATIONS ── */
+  .simulations {
+    padding: 4.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .sim-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 560px) {
+    .sim-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .sim-card {
+    display: block;
+    text-decoration: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem 1.75rem 2rem;
+    transition: border-color 0.25s, background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sim-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(127, 179, 217, 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .sim-card:hover {
+    border-color: var(--border-hover);
+    background: var(--surface-hover);
+  }
+
+  .sim-card:hover::before {
+    opacity: 1;
+  }
+
+  .sim-number {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+    opacity: 0.7;
+  }
+
+  .sim-title {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: var(--accent-light);
+    margin-bottom: 0.85rem;
+    line-height: 1.3;
+  }
+
+  .sim-desc {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 1.75rem;
+  }
+
+  .sim-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.7;
+    transition: opacity 0.2s, gap 0.2s;
+  }
+
+  .sim-card:hover .sim-link {
+    opacity: 1;
+    gap: 0.6rem;
+  }
+
+  .sim-link svg {
+    width: 12px;
+    height: 12px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2.5rem 0 3rem;
+  }
+
+  .footer-text {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    opacity: 0.65;
+  }
+
+  /* ── LANGUAGE VISIBILITY ── */
+  [data-lang-text] { display: none; }
+  [data-lang="en"] [data-lang-text="en"],
+  [data-lang="de"] [data-lang-text="de"] { display: inline; }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <span class="site-name">github.com/Merlin2LmmL/Universe-Simulations</span>
+      <div class="lang-toggle" role="group" aria-label="Language / Sprache">
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')" aria-pressed="true">EN</button>
+        <span class="lang-divider" aria-hidden="true">/</span>
+        <button class="lang-btn" id="btn-de" onclick="setLang('de')" aria-pressed="false">DE</button>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <main class="page-shell">
-      <noscript>
-        <section class="panel fallback-panel">
-          <h2>Universe Simulations</h2>
-          <p>This site uses JavaScript for language switching and interactive simulations. Please enable JavaScript to view the full experience.</p>
-        </section>
-      </noscript>
+  <!-- Hero -->
+  <section class="hero" aria-label="Introduction">
+    <p class="hero-label">
+      <span data-lang-text="en">Interactive Physics</span>
+      <span data-lang-text="de">Interaktive Physik</span>
+    </p>
+    <h1 class="hero-title">
+      <span data-lang-text="en">The Universe</span>
+      <span data-lang-text="de">Das Universum</span>
+    </h1>
+    <p class="hero-body">
+      <span data-lang-text="en">Two small Simulations explaining fundamental physicl concepts from cosmology. To reach a better understanding of our Universe.</span>
+      <span data-lang-text="de">Zwei kleine Simulationen gedacht um fundamentale physikalische Konzepte der Kosmologie zu erklären. Um ein besseres Verständnis unseres Universums zu erhalten.</span>
+    </p>
+  </section>
 
-      <section class="hero" id="project">
-        <div class="hero-grid">
-          <div>
-            <span class="section-label">
-              <span data-lang-text="en">Project Overview</span>
-              <span data-lang-text="de">Projektüberblick</span>
-            </span>
-            <h2>
-              <span data-lang-text="en">Making core cosmology topics easier to explore.</span>
-              <span data-lang-text="de">Zentrale kosmologische Themen verständlicher machen.</span>
-            </h2>
-            <p>
-              <span data-lang-text="en">This repository will grow into a set of browser-based visualizations that explain key ideas about our universe in a clear and accessible way.</span>
-              <span data-lang-text="de">Dieses Repository wächst zu einer Sammlung von browserbasierten Visualisierungen heran, die wichtige Ideen über unser Universum klar und zugänglich erklären.</span>
-            </p>
-            <div class="hero-actions">
-              <a class="button primary" href="#simulations">
-                <span data-lang-text="en">Explore the roadmap</span>
-                <span data-lang-text="de">Roadmap ansehen</span>
-              </a>
-              <a class="button" href="README.md">
-                <span data-lang-text="en">Read the project notes</span>
-                <span data-lang-text="de">Projektnotizen lesen</span>
-              </a>
-            </div>
-          </div>
-          <aside class="hero-card" aria-label="Current scope">
-            <strong>
-              <span data-lang-text="en">What is prepared now</span>
-              <span data-lang-text="de">Was aktuell vorbereitet ist</span>
-            </strong>
-            <ul>
-              <li>
-                <span data-lang-text="en">English folder names across the project</span>
-                <span data-lang-text="de">Englische Ordnernamen im gesamten Projekt</span>
-              </li>
-              <li>
-                <span data-lang-text="en">Single-page language toggles for every topic</span>
-                <span data-lang-text="de">Sprachumschaltung direkt auf jeder Themenseite</span>
-              </li>
-              <li>
-                <span data-lang-text="en">Shared styling for both languages</span>
-                <span data-lang-text="de">Gemeinsames Design für beide Sprachen</span>
-              </li>
-            </ul>
-          </aside>
-        </div>
-      </section>
+  <!-- Simulations -->
+  <section class="simulations" aria-label="Simulations">
+    <p class="section-label">
+      <span data-lang-text="en">Simulations</span>
+      <span data-lang-text="de">Simulationen</span>
+    </p>
 
-      <section id="simulations">
-        <span class="section-label">
-          <span data-lang-text="en">Planned Simulations</span>
-          <span data-lang-text="de">Geplante Simulationen</span>
+    <div class="sim-grid">
+
+      <!-- Card 1: Hubble Expansion -->
+      <a class="sim-card" href="hubble/" aria-label="Hubble Expansion simulation">
+        <p class="sim-number">01</p>
+        <h2 class="sim-title">Hubble Expansion</h2>
+        <p class="sim-desc">
+          <span data-lang-text="en">Watch how galaxies recede from each other as space itself stretche. Not because they move through it, but because it grows.</span>
+          <span data-lang-text="de">Wie Galaxien voneinander zurückweichen, während sich der Raum selbst dehnt. Nicht weil sie sich durch ihn bewegen, sondern weil er wächst.</span>
+        </p>
+        <span class="sim-link" aria-hidden="true">
+          <span data-lang-text="en">Open simulation</span>
+          <span data-lang-text="de">Simulation öffnen</span>
+          <svg viewBox="0 0 16 16" aria-hidden="true"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg>
         </span>
-        <div class="cards-grid" style="margin-top: 18px;">
-          <article class="card">
-            <h3>Hubble Expansion</h3>
-            <p>
-              <span data-lang-text="en">Visualize how the universe expands over time and how distant galaxies recede.</span>
-              <span data-lang-text="de">Visualisiert, wie sich das Universum ausdehnt und Galaxien sich entfernen.</span>
-            </p>
-            <div class="card-meta"><span>Folder: hubble/</span><span data-lang-text="en">Coming soon</span><span data-lang-text="de">Bald verfügbar</span></div>
-            <a class="card-link" href="hubble/">
-              <span data-lang-text="en">Open page</span>
-              <span data-lang-text="de">Seite öffnen</span>
-            </a>
-          </article>
-          <article class="card">
-            <h3>Future Curves</h3>
-            <p>
-              <span data-lang-text="en">Use a slider to compare possible cosmic futures and their expansion paths.</span>
-              <span data-lang-text="de">Vergleicht mögliche kosmische Zukünfte mit einem Schieberegler.</span>
-            </p>
-            <div class="card-meta"><span>Folder: future/</span><span data-lang-text="en">Coming soon</span><span data-lang-text="de">Bald verfügbar</span></div>
-            <a class="card-link" href="future/">
-              <span data-lang-text="en">Open page</span>
-              <span data-lang-text="de">Seite öffnen</span>
-            </a>
-          </article>
-          <article class="card">
-            <h3>Universe Timeline</h3>
-            <p>
-              <span data-lang-text="en">Animate a chronological overview from the Big Bang to the far future.</span>
-              <span data-lang-text="de">Animierter Überblick von den ersten Momenten bis in die ferne Zukunft.</span>
-            </p>
-            <div class="card-meta"><span>Folder: timeline/</span><span data-lang-text="en">Coming soon</span><span data-lang-text="de">Bald verfügbar</span></div>
-            <a class="card-link" href="timeline/">
-              <span data-lang-text="en">Open page</span>
-              <span data-lang-text="de">Seite öffnen</span>
-            </a>
-          </article>
-          <article class="card">
-            <h3>Redshift</h3>
-            <p>
-              <span data-lang-text="en">Explain wavelength stretching with an animation that makes Doppler shift visible.</span>
-              <span data-lang-text="de">Erklärt die Wellenlängenverschiebung mit einer Animation für Licht und Bewegung.</span>
-            </p>
-            <div class="card-meta"><span>Folder: redshift/</span><span data-lang-text="en">Coming soon</span><span data-lang-text="de">Bald verfügbar</span></div>
-            <a class="card-link" href="redshift/">
-              <span data-lang-text="en">Open page</span>
-              <span data-lang-text="de">Seite öffnen</span>
-            </a>
-          </article>
-        </div>
-      </section>
-    </main>
+      </a>
 
-    <footer class="site-footer page-shell">
-      <p>
-        <span data-lang-text="en">Initial scaffold for future physics visualizations.</span>
-        <span data-lang-text="de">Erste Struktur für zukünftige physikalische Visualisierungen.</span>
-      </p>
-    </footer>
-  </body>
+      <!-- Card 2: Redshift -->
+      <a class="sim-card" href="redshift/" aria-label="Redshift simulation">
+        <p class="sim-number">02</p>
+        <h2 class="sim-title">Redshift</h2>
+        <p class="sim-desc">
+          <span data-lang-text="en">See how the expansion of space stretches light itself: Shifting wavelengths toward the red end of the spectrum, letting us measure cosmic distances.</span>
+          <span data-lang-text="de">Wie die Expansion des Raums das Licht selbst dehnt: Wellenlängen ins Rote verschiebt und uns ermöglicht, kosmische Distanzen zu messen.</span>
+        </p>
+        <span class="sim-link" aria-hidden="true">
+          <span data-lang-text="en">Open simulation</span>
+          <span data-lang-text="de">Simulation öffnen</span>
+          <svg viewBox="0 0 16 16" aria-hidden="true"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg>
+        </span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p class="footer-text">
+      <span data-lang-text="en">A small project made for a physics presentations by Merlin2LmmL. Contact: ortnermerlin@gmail.com</span>
+      <span data-lang-text="de">Ein kleines Projekt gemacht für einen Phyisk Vortrag von Merlin2LmmL. Kontakt: ortnermerlin@gmail.com</span>
+    </p>
+  </footer>
+
+</div>
+
+<script>
+  function setLang(lang) {
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+    document.getElementById('btn-en').setAttribute('aria-pressed', lang === 'en');
+    document.getElementById('btn-de').setAttribute('aria-pressed', lang === 'de');
+  }
+
+  (function() {
+    const saved = localStorage.getItem('universe-lang');
+    if (saved === 'de') setLang('de');
+  })();
+
+  document.getElementById('btn-en').addEventListener('click', function() {
+    localStorage.setItem('universe-lang', 'en');
+  });
+  document.getElementById('btn-de').addEventListener('click', function() {
+    localStorage.setItem('universe-lang', 'de');
+  });
+</script>
+
+</body>
 </html>
